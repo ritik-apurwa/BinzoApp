@@ -34,10 +34,6 @@ export const WhyUsSection = () => {
         <WhyCard image={WhyUsLanguage} title="6+" description=" Languages" />
         <WhyCard image={WhyUsService} title="24x7" description=" Support" />
       </div>
-
-      <div className="relative">
-        <BannerCard />
-      </div>
     </section>
   );
 };

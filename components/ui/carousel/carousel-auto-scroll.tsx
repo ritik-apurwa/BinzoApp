@@ -1,46 +1,34 @@
-import React, { useCallback, useEffect, useState } from "react";
+"use client";
+
+import React, { useCallback, useEffect, useState, ReactNode } from "react";
 import { EmblaOptionsType } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
 import AutoScroll from "embla-carousel-auto-scroll";
-import { NextButton, PrevButton, usePrevNextButtons } from "./carousel-btn";
-import Image from "next/image";
 import { PauseCircle, PlayCircle } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
-type PropType = {
-  slides: number[];
-  options?: EmblaOptionsType;
+type SlideType = {
+  id: number;
 };
 
-const EmblaCarousel: React.FC<PropType> = ({ slides, options }) => {
+type PropType = {
+  slides: SlideType[];
+  options?: EmblaOptionsType;
+  showControls: boolean;
+  children: ReactNode;
+};
+
+const EmblaCarousel: React.FC<PropType> = ({
+  slides,
+  options,
+  showControls,
+  children,
+}) => {
   const [emblaRef, emblaApi] = useEmblaCarousel(options, [
     AutoScroll({ playOnInit: true }),
   ]);
   const [isPlaying, setIsPlaying] = useState(false);
   const [hovered, setHovered] = useState(false);
-
-  const {
-    prevBtnDisabled,
-    nextBtnDisabled,
-    onPrevButtonClick,
-    onNextButtonClick,
-  } = usePrevNextButtons(emblaApi);
-
-  const onButtonAutoplayClick = useCallback(
-    (callback: () => void) => {
-      const autoScroll = emblaApi?.plugins()?.autoScroll;
-      if (!autoScroll) return;
-
-      const resetOrStop =
-        autoScroll.options.stopOnInteraction === false
-          ? autoScroll.reset
-          : autoScroll.stop;
-
-      resetOrStop();
-      callback();
-    },
-    [emblaApi]
-  );
 
   const toggleAutoplay = useCallback(() => {
     const autoScroll = emblaApi?.plugins()?.autoScroll;
@@ -79,9 +67,9 @@ const EmblaCarousel: React.FC<PropType> = ({ slides, options }) => {
             height: 0,
             opacity: 0,
           }}
-          className="absolute  bottom-10 flex w-full justify-center"
+          className="absolute bottom-10 flex w-full justify-center"
         >
-          <div className="bg-black/20  px-4 py-3 rounded-md flex items-center justify-center  w-fit h-fit ">
+          <div className="bg-black/20 px-4 py-3 rounded-md flex items-center justify-center w-fit h-fit ">
             <button
               onClick={toggleAutoplay}
               className="flex items-center gap-2 text-white"
@@ -107,24 +95,19 @@ const EmblaCarousel: React.FC<PropType> = ({ slides, options }) => {
     >
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex">
-          {slides.map((index) => (
-            <div className="w-full flex-shrink-0 flex-grow-0" key={index}>
+          {React.Children.map(children, (child, index) => (
+            <div
+              className="w-full flex-shrink-0 flex-grow-0"
+              key={slides[index].id}
+            >
               <div className="h-auto max-h-60 lg:max-h-[500px] w-full p-10 flex justify-center items-center">
-                <Image
-                  height={1200}
-                  width={1200}
-                  className="w-full h-full object-cover rounded-md"
-                  src={`https://picsum.photos/600/350?v=${index}`}
-                  alt="Carousel image"
-                />
+                {child}
               </div>
             </div>
           ))}
         </div>
       </div>
-      <div className="">
-        <AutoScrollControls />
-      </div>
+      {showControls && <AutoScrollControls />}
     </div>
   );
 };

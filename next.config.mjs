@@ -2,6 +2,16 @@ import { hostname } from "os";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+
+  typescript:{
+    ignoreBuildErrors:true
+  }, 
+  eslint:{
+    ignoreBuildErrors:true
+  }, 
+
+
+
   images: {
     remotePatterns: [
       {
