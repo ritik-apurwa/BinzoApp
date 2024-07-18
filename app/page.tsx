@@ -1,16 +1,18 @@
-"use client";
-
-
-import EmblaCarousel from "@/components/ui/carousel/carousel-auto-scroll";
+import Hero from "@/components/Hero";
+import { WhyUsSection } from "@/components/WhyUs";
+import { UserButton } from "@clerk/nextjs";
+import Link from "next/link";
 import React from "react";
 
 const page = () => {
-  const items = Array.from({ length: 10 }, (_, i) => i);
-
-  const items2 = Array.from({ length: 20 }, (_, i) => `Text ${i + 1}`);
   return (
-    <section className="">
-      <EmblaCarousel slides={items} options={{ loop: true, axis: "x" }} />
+    <section>
+      <section id="hero">
+        <Hero />
+      </section>
+      <section>
+        <WhyUsSection />
+      </section>
     </section>
   );
 };
