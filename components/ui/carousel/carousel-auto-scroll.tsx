@@ -7,6 +7,7 @@ import AutoScroll from "embla-carousel-auto-scroll";
 import { PauseCircle, PlayCircle } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
+
 type SlideType = {
   id: number;
 };

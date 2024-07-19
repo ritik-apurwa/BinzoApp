@@ -1,70 +1,134 @@
+import React from "react";
 import { testimonials } from "@/data";
-import Image, { StaticImageData } from "next/image";
-import { FaStar } from "react-icons/fa";
+import Image from "next/image";
+import { FaRegStar } from "react-icons/fa";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { Star, StarHalf } from "lucide-react";
+import BannerCard from "./BannerCard";
 
-interface User {
-  id: number;
-  name: string;
-  image: StaticImageData;
-  reviewDescription: string;
-  rating: number;
-}
+const Stars = ({ rating }: { rating: number }) => {
+  const fullStars = Math.floor(rating);
+  const hasHalfStar = rating % 1 >= 0.5;
 
-interface BinzoUsersProps {
-  testimonials: User[];
-}
-
-interface BinzoUsersCardProps {
-  user: User;
-}
-
-const BinzoUsersCard: React.FC<BinzoUsersCardProps> = ({ user }) => {
   return (
-    <div className="bg-white flex flex-col max-w-96 items-center justify-center  border border-b-black  py-4 rounded-lg overflow-hidden">
-      <div className="relative size-14 rounded-full overflow-hidden">
-        <Image
-          src={user.image}
-          alt={user.name}
-          layout="fill"
-          objectFit="cover"
-          className="object-center object-cover"
-        />
-      </div>
-
-      <div className="p-4 text-center px-10">
-        <h2 className="text-xl font-semibold mb-2">{user.name}</h2>
-        <p className="text-gray-600 mb-4">{user.reviewDescription}</p>
-      </div>
-
-      <div className="flex w-full justify-center items-center">
-        <p className="text-gray-400 text-sm">Rating:</p>
-        <div className="ml-2 flex  items-center">
-          <FaStar className="text-yellow-400" />
-          <FaStar className="text-yellow-400" />
-          <FaStar className="text-yellow-400" />
-          <FaStar className="text-yellow-400" />
-        </div>
-      </div>
+    <div className="flex">
+      {[...Array(5)].map((_, i) => {
+        if (i < fullStars) {
+          return <Star key={i} className="text-yellow-400 fill-yellow-400" />;
+        } else if (i === fullStars && hasHalfStar) {
+          return (
+            <StarHalf key={i} className="text-yellow-400 fill-yellow-400" />
+          );
+        } else {
+          return <FaRegStar size={22} key={i} className="text-yellow-400" />;
+        }
+      })}
     </div>
   );
 };
 
-const BinzoUsers: React.FC<BinzoUsersProps> = ({ testimonials }) => {
+const RatingBar = ({
+  stars,
+  percentage,
+}: {
+  stars: number;
+  percentage: number;
+}) => {
   return (
-    <section className="max-w-7xl mx-auto flex flex-col gap-y-4">
-      {testimonials.map((user) => (
-        <BinzoUsersCard key={user.id} user={user} />
-      ))}
+    <div className="flex items-center gap-2">
+      <span className="w-3 text-sm">{stars}</span>
+      <div className="w-full bg-gray-200 rounded-full h-2">
+        <div
+          className="bg-purple-600 h-2 rounded-full"
+          style={{ width: `${percentage}%` }}
+        ></div>
+      </div>
+      <span className="w-8 text-right text-sm">{percentage}%</span>
+    </div>
+  );
+};
+
+const TestimonialsSection = () => {
+  const overallRating = 4.7;
+  const ratings = [
+    { stars: 5, percentage: 35 },
+    { stars: 4, percentage: 40 },
+    { stars: 3, percentage: 8 },
+    { stars: 2, percentage: 12 },
+    { stars: 1, percentage: 5 },
+  ];
+
+  return (
+    <section className="bg-gradient-to-br from-purple-100 to-indigo-100 pt-2 pb-10  sm:px-6 lg:px-8">
+      <BannerCard title="Testimonials" />
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col lg:flex-row gap-8 px-4 lg:items-center items-start">
+          <div className="w-full lg:w-1/3 bg-white rounded-lg shadow-lg p-6">
+            <div className="flex items-center justify-center mb-4">
+              <div className="text-5xl font-bold text-purple-600 mr-4">
+                {overallRating}
+              </div>
+              <div>
+                <Stars rating={overallRating} />
+                <p className="text-sm text-gray-600 mt-1">out of 5</p>
+              </div>
+            </div>
+            <div className="space-y-2">
+              {ratings.map((rating) => (
+                <RatingBar
+                  key={rating.stars}
+                  stars={rating.stars}
+                  percentage={rating.percentage}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div className="w-full lg:w-2/3">
+            <Carousel className="w-full">
+              <CarouselContent>
+                {testimonials.map((item) => (
+                  <CarouselItem
+                    key={item.id}
+                    className="sm:basis-1/2 lg:basis-1/3"
+                  >
+                    <div className="bg-white m-1 p-6 rounded-lg shadow-md flex flex-col items-center h-full">
+                      <div className="relative w-20 h-20 rounded-full overflow-hidden mb-4">
+                        <Image
+                          src={item.image}
+                          alt={item.name}
+                          height={400}
+                          width={400}
+                          className="object-center object-cover size-20"
+                        />
+                      </div>
+                      <h3 className="text-lg font-semibold mb-2">
+                        {item.name}
+                      </h3>
+                      <Stars rating={item.rating} />
+                      <p className="text-gray-600 text-sm mt-4 text-center">
+                        {item.reviewDescription}
+                      </p>
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <div className="hidden sm:block">
+                <CarouselPrevious />
+                <CarouselNext />
+              </div>
+            </Carousel>
+          </div>
+        </div>
+      </div>
     </section>
   );
 };
 
-const BinzoUsersPage = () => {
-  return (
-    <section className="h-auto w-full">
-      <BinzoUsers testimonials={testimonials} />
-    </section>
-  );
-};
-
-export default BinzoUsersPage;
+export default TestimonialsSection;

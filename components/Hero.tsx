@@ -6,8 +6,8 @@ import { homebg } from "@/data";
 const Hero = () => {
   return (
     <section>
-      <div className="min-h-[60vh] w-screen ">
-        <div className="h-[60vh] max-h-[60vh] overflow-hidden font-bold text-center relative  items-center flex  justify-center">
+      <div className="min-h-[80vh] w-screen  ">
+        <div className="h-[80vh] max-h-[80vh] overflow-hidden font-bold text-center relative  items-center flex  justify-center">
           <div>
             <Image
               className="w-full overflow-hidden object-cover object-center"

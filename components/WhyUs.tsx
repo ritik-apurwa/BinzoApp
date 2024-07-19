@@ -24,11 +24,9 @@ export const WhyCard = ({ description, image, title }: WhyCard) => {
 export const WhyUsSection = () => {
   return (
     <section className={`my-4 relative `}>
-      <div className="relative">
-        <BannerCard title="Why winzo" />
-      </div>
+      <BannerCard title="Why winzo" />
 
-      <div className="grid py-4 grid-cols-4">
+      <div className="grid py-4 max-w-7xl mx-auto lg:px-20 grid-cols-4">
         <WhyCard image={WhyUsNoBot} title="No Bot" description="Certified" />
         <WhyCard image={WhyUsSecure} title="100%" description=" secure" />
         <WhyCard image={WhyUsLanguage} title="6+" description=" Languages" />

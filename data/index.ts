@@ -1,9 +1,9 @@
 import { IconType } from "react-icons";
-import hti1 from "@/public/htiimages/dhoni_step1.webp"
-import hti2 from "@/public/htiimages/dhoni_step2.webp"
-import hti3 from "@/public/htiimages/dhoni_step3.webp"
-import hti4 from "@/public/htiimages/Step-3-Englishv2.webp"
-import hti5 from "@/public/htiimages/Step-4-Englishv2.webp"
+import hti1 from "@/public/htiimages/dhoni_step1.webp";
+import hti2 from "@/public/htiimages/dhoni_step2.webp";
+import hti3 from "@/public/htiimages/dhoni_step3.webp";
+import hti4 from "@/public/htiimages/Step-3-Englishv2.webp";
+import hti5 from "@/public/htiimages/Step-4-Englishv2.webp";
 import {
   FaHome,
   FaInfoCircle,
@@ -30,13 +30,11 @@ import TopGamesPool from "@/public/gamescard/pool.jpg";
 import TopGamesFruitNinja from "@/public/gamescard/fruitsmurai.webp";
 import { StaticImageData } from "next/image";
 
-import user1 from "@/public/testimonial/user1.jpg"
-import user2 from "@/public/testimonial/user2.jpg"
-import user3 from "@/public/testimonial/user3.jpg"
-import user4 from "@/public/testimonial/user4.jpg"
-import user5 from '@/public/testimonial/user5.webp'
-
-
+import user1 from "@/public/testimonial/user1.jpg";
+import user2 from "@/public/testimonial/user2.jpg";
+import user3 from "@/public/testimonial/user3.jpg";
+import user4 from "@/public/testimonial/user4.jpg";
+import user5 from "@/public/testimonial/user5.webp";
 
 export interface Testimonial {
   id: number;
@@ -89,8 +87,6 @@ export const testimonials: Testimonial[] = [
   },
 ];
 
-
-
 export { WhyUsSecure, WhyUsService, WhyUsLanguage, WhyUsNoBot };
 
 export { homebg, aboutbg, bannersvg };
@@ -107,9 +103,7 @@ export interface howToInsallSteps {
   description: string;
 }
 
-
-
-export  const howToInsallSteps: howToInsallSteps[] = [
+export const howToInsallSteps: howToInsallSteps[] = [
   {
     id: 1,
     imageUrl: hti1,
@@ -142,20 +136,14 @@ export  const howToInsallSteps: howToInsallSteps[] = [
   },
 ];
 
-export const Navlinks: Navlink[] = [
-  { id: 1, href: "#home", name: "Home", Icon: FaHome },
-  { id: 2, href: "#about", name: "About", Icon: FaInfoCircle },
-  { id: 3, href: "#faq", name: "FAQ", Icon: FaQuestionCircle },
-  { id: 4, href: "#contact", name: "Contact", Icon: FaPhone },
-  { id: 5, href: "#why-binzo", name: "Why Binzo", Icon: FaLightbulb },
-  { id: 6, href: "#binzo-winners", name: "Binzo Winners", Icon: FaTrophy },
-  {
-    id: 7,
-    href: "#how-to-install",
-    name: "How to Install & Download App",
-    Icon: FaDownload,
-  },
-  { id: 8, href: "#top-games", name: "Top Games", Icon: FaGamepad },
+export const navlinks:Navlink[] = [
+  { id: 1, href: "/#home", name: "Home", Icon: FaHome },
+  { id: 2, href: "/#about", name: "About", Icon: FaInfoCircle },
+  { id: 4, href: "/#faq", name: "FAQ", Icon: FaQuestionCircle },
+  { id: 5, href: "/#top-games", name: "Top Games", Icon: FaGamepad },
+  { id: 6, href: "/#why-binzo", name: "Why Binzo", Icon: FaLightbulb },
+  { id: 7, href: "/#binzo-winners", name: "Binzo Winners", Icon: FaTrophy },
+  { id: 8, href: "/#how-to-install", name: "How to Install & Download App", Icon: FaDownload },
 ];
 
 export interface TopGame {

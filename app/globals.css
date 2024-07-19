@@ -1,6 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+:root{
+  pointer-events: painted;
+}
 
 @layer base {
   :root {
