@@ -17,6 +17,7 @@ import {
 import homebg from "@/public/home/homebg.jpg";
 import aboutbg from "@/public/home/aboutusimg.jpg";
 import bannersvg from "@/public/home/banner.svg";
+import bannersvg2 from "@/public/home/Slant.svg"
 
 import WhyUsSecure from "@/public/WhyUs/WhyUsSecure.webp";
 import WhyUsService from "@/public/WhyUs/WhyUsService.webp";
@@ -92,7 +93,7 @@ export const testimonials: Testimonial[] = [
   },
 ];
 
-export { WhyUsSecure, WhyUsService, heroBanner1, pLogo,  heroBanner2,  WhyUsLanguage, WhyUsNoBot };
+export { WhyUsSecure, WhyUsService, heroBanner1, pLogo,  heroBanner2, bannersvg2,   WhyUsLanguage, WhyUsNoBot };
 
 export { homebg, aboutbg, bannersvg };
 interface Navlink {

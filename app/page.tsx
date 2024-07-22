@@ -15,7 +15,7 @@ import TestPage from "@/components/TestPage";
 
 const HomePage = () => {
   return (
-    <motion.div>
+    <motion.div className="radial-gradient">
       <section id="home">
         <Hero />
       </section>

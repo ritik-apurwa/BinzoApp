@@ -157,7 +157,7 @@ const FollowUs = () => {
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-100 text-gray-700">
+    <footer className=" text-white">
       <div className="grid grid-cols-1 max-w-7xl mx-auto items-center md:grid-cols-2 lg:grid-cols-3">
         <div>
           <FollowUs />

@@ -65,11 +65,11 @@ const TestimonialsSection = () => {
   ];
 
   return (
-    <section className="bg-gradient-to-br from-purple-100 to-indigo-100 pt-2 pb-10  sm:px-6 lg:px-8">
+    <section className="bg-gradient-to-br text-white  pt-2 pb-10  sm:px-6 lg:px-8">
       <BannerCard title="Testimonials" />
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col lg:flex-row gap-8 px-4 lg:items-center items-start">
-          <div className="w-full lg:w-1/3 bg-white rounded-lg shadow-lg p-6">
+          <div className="w-full lg:w-1/3  rounded-lg shadow-lg p-6">
             <div className="flex items-center justify-center mb-4">
               <div className="text-5xl font-bold text-purple-600 mr-4">
                 {overallRating}
@@ -98,7 +98,7 @@ const TestimonialsSection = () => {
                     key={item.id}
                     className="sm:basis-1/2 lg:basis-1/3"
                   >
-                    <div className="bg-white m-1 p-6 rounded-lg shadow-md flex flex-col items-center h-full">
+                    <div className=" text-white m-1 p-6 rounded-lg shadow-md flex flex-col items-center h-full">
                       <div className="relative w-20 h-20 rounded-full overflow-hidden mb-4">
                         <Image
                           src={item.image}
@@ -112,7 +112,7 @@ const TestimonialsSection = () => {
                         {item.name}
                       </h3>
                       <Stars rating={item.rating} />
-                      <p className="text-gray-600 text-sm mt-4 text-center">
+                      <p className="text-white text-sm mt-4 text-center">
                         {item.reviewDescription}
                       </p>
                     </div>
