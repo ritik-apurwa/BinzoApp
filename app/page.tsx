@@ -10,6 +10,7 @@ import Hero from "@/components/Hero";
 import HowToInstall from "@/components/HowToInstall";
 import TopGames from "@/components/TopGames";
 import { WhyUsSection } from "@/components/WhyUs";
+import TestPage from "@/components/TestPage";
 // We'll create this component next
 
 const HomePage = () => {
@@ -18,7 +19,6 @@ const HomePage = () => {
       <section id="home">
         <Hero />
       </section>
-
       <section id="why-binzo">
         <WhyUsSection />
       </section>

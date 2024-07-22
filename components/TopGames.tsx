@@ -40,6 +40,8 @@ const TopGames = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
+          <CarouselNext/>
+          <CarouselPrevious/>
         </Carousel>
       </div>
     </section>

@@ -1,17 +1,12 @@
 "use client";
 
-import { navlinks } from "@/data";
-import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { usePathname, useRouter } from "next/navigation";
-import { motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+import { navlinks, pLogo } from "@/data";
 import Menu from "./MenuToggle";
-
-const Logo = () => (
-  <div className="text-2xl font-bold text-black">
-    <Link href="/">Logo</Link>
-  </div>
-);
 
 interface MenuProps {
   children?: React.ReactNode;
@@ -19,83 +14,105 @@ interface MenuProps {
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+const Logo = () => (
+  <div className="text-2xl font-bold">
+    <Link href="/">
+      <Image
+        src={pLogo}
+        alt="Logo"
+        height={300}
+        width={300}
+        className="object-contain w-20 h-16 transition-transform duration-300 hover:scale-110"
+      />
+    </Link>
+  </div>
+);
+
 const MobileNav = ({ active, setActive }: MenuProps) => {
-  const pathname = usePathname();
   const router = useRouter();
 
   const handleRoute = (href: string) => {
     setActive(false);
-router.push(href);
+    router.push(href);
   };
 
   return (
-    <motion.div
-      initial={false}
-      animate={{ height: active ? "auto" : 0 }}
-      transition={{ duration: 0.5 }}
-      className="overflow-hidden lg:hidden"
-    >
+    <AnimatePresence>
       {active && (
-        <div className="flex flex-col items-center mt-2">
-          {navlinks.map((item) => {
-            const { Icon, href, id, name } = item;
-            return (
-              <div key={item.id} className="p-2">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.3 }}
+          className="lg:hidden bg-gradient-morphism animate-morphism absolute top-full left-0 w-full"
+        >
+          <div className="flex flex-col items-center py-4">
+            {navlinks.map((item) => (
+              <motion.div
+                key={item.id}
+                className="p-2 w-full"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <div
-                  className="flex flex-row items-center gap-x-4"
-                  onClick={() => handleRoute(href)}
+                  className="flex cursor-pointer flex-row items-center justify-center gap-x-4 text-white hover:text-accent transition-colors duration-300"
+                  onClick={() => handleRoute(item.href)}
                 >
-                  <span>
-                    <Icon className="" />
+                  <span className="text-2xl">
+                    <item.Icon />
                   </span>
-                  <span className=" text-lg">{item.name}</span>
+                  <span className="text-lg font-semibold">{item.name}</span>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
       )}
-    </motion.div>
+    </AnimatePresence>
   );
 };
 
-// const LgNav = () => {
-//   const pathname = usePathname();
-//   const router = useRouter();
-
-//   return (
-//     <nav className="hidden lg:flex flex-row gap-x-4 items-center">
-//       {navlinks.map(((item) => (
-//         <motion.div
-//           key={item.id}
-//           whileHover={{ scale: 1.1 }}
-//           transition={{ type: "spring", stiffness: 300 }}
-//         >
-//           <Link href={item.href}>
-//             <span className="text-black text-lg">{item.name}</span>
-//           </Link>
-//         </motion.div>
-//       ))}
-
-//     </nav>
-//   );
-// };
-
-const Navbar = () => {
-  const [active, setIsActive] = React.useState(false);
+const LgNav = () => {
+  const pathname = usePathname();
 
   return (
-    <section className="w-screen flex flex-col items-center ">
-      <header className="max-w-7xl w-full flex flex-row justify-between items-center gap-x-4 mx-auto p-4">
-        <Logo />
-        {/* <LgNav /> */}
-        <Menu active={active} setActive={setIsActive} />
-      </header>
+    <nav className="hidden lg:flex text-white flex-row gap-x-6 items-center">
+      {navlinks.map((item) => (
+        <motion.div
+          key={item.id}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <Link
+            href={item.href}
+            className={`text-lg font-semibold hover:text-accent transition-colors duration-300 ${
+              pathname === item.href ? "text-accent" : ""
+            }`}
+          >
+            {item.name}
+          </Link>
+        </motion.div>
+      ))}
+    </nav>
+  );
+};
 
-      <div className="lg:hidden flex flex-col items-center relative">
-        <MobileNav active={active} setActive={setIsActive} />
+const Navbar = () => {
+  const [active, setIsActive] = useState(false);
+
+  return (
+    <header className="fixed top-0 z-50 w-full bg-gradient-morphism animate-morphism">
+      <div className="max-w-7xl mx-auto px-4 py-4">
+        <div className="flex items-center justify-between">
+          <Logo />
+          <LgNav />
+          <div className="lg:hidden">
+            <Menu active={active} setActive={setIsActive} />
+          </div>
+        </div>
       </div>
-    </section>
+      <MobileNav active={active} setActive={setIsActive} />
+    </header>
   );
 };
 

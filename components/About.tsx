@@ -8,7 +8,7 @@ import BannerCard from "./BannerCard";
 
 const About = () => {
   return (
-    <section className="py-4">
+    <section className="py-4 max-w-7xl mx-auto">
       <BannerCard title="About Us" />
       <section className="relative">
         <div className="min-w-full min-h-[70vh] overflow-hidden">

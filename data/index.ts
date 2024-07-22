@@ -36,6 +36,11 @@ import user3 from "@/public/testimonial/user3.jpg";
 import user4 from "@/public/testimonial/user4.jpg";
 import user5 from "@/public/testimonial/user5.webp";
 
+
+import heroBanner1 from "@/public/home/heroBanner.jpeg"
+import heroBanner2 from "@/public/home/heroBanner2.jpeg"
+import pLogo from "@/public/home/logopng.png"
+
 export interface Testimonial {
   id: number;
   name: string;
@@ -87,7 +92,7 @@ export const testimonials: Testimonial[] = [
   },
 ];
 
-export { WhyUsSecure, WhyUsService, WhyUsLanguage, WhyUsNoBot };
+export { WhyUsSecure, WhyUsService, heroBanner1, pLogo,  heroBanner2,  WhyUsLanguage, WhyUsNoBot };
 
 export { homebg, aboutbg, bannersvg };
 interface Navlink {
